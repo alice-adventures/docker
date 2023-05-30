@@ -15,11 +15,10 @@ ENV PHP_FPM_VERSION=8.1
 ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
 ENV CODE_SERVER_PORT=${code_server_port}
 
-RUN apt update
-
 
 ### Install required packages
 
+RUN apt update
 RUN DEBIAN_FRONTEND=noninteractive \
     apt install -y --no-install-recommends \
     apt-utils \
