@@ -38,8 +38,9 @@ docker run --detach --tty --name alice --hostname wland alice-adventures:0.1.1
 
 ### Enter Wonderland
 
-Open your preferred browser in you host and connect to the IP address of the
-container. If unsure, inspect the IP address of a running container:
+Open your preferred browser in your host and connect to `http://IP_address`
+of the container, for example: `http://172.17.0.1` (do not use `https`). If
+unsure, inspect the IP address the alice container:
 
 ```sh
 docker inspect --format {{.NetworkSettings.IPAddress}} alice
