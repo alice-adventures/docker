@@ -137,8 +137,8 @@ RUN sed -e 's:pm = dynamic:pm = static:' \
 
 USER root
 WORKDIR /var/www
-RUN rm -rf * && \
-    git clone https://github.com/alice-adventures/project_euler.git -b html html
+RUN rm -rf html && \
+    git clone https://github.com/alice-adventures/docker.git -b html html
 
 
 ### Entrypoint
