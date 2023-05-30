@@ -130,6 +130,7 @@ WORKDIR /etc/php/${PHP_FPM_VERSION}/fpm/pool.d
 RUN pwd
 RUN sed -e 's:pm = dynamic:pm = static:' \
     -e 's:pm.max_children = 5:pm.max_children = 1:' \
+    -e 's:;clear_env = no:clear_env = no:' \
     -e 's:;security.limit_extensions = .php:security.limit_extensions = .php .html:' www.conf > www.conf.new && \
     mv www.conf.new www.conf
 
@@ -148,8 +149,8 @@ USER root
 WORKDIR /usr/local/bin
 RUN echo \
     "#!/bin/bash\n\
-    sudo nginx\n\
-    sudo php-fpm${PHP_FPM_VERSION}\n\
+    sudo -E nginx\n\
+    sudo -E php-fpm${PHP_FPM_VERSION}\n\
     start-code-server.sh\n\
     /bin/bash"\
     > entrypoint.sh
