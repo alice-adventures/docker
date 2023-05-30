@@ -1,7 +1,54 @@
-<html>
-  <head></head>
-  <body>
-    <h1>Alice docker</h1>
-    <p>work in progress</p>
-  </body>
+<html lang="en" data-bn-theme="light">
+
+<head>
+  <title>Alice in Dockerland</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- Compiled and minified bootstrap 5.3 -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <script src="/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/css/alice.css">
+</head>
+
+<body>
+
+  <header>
+    <h5>Alice Docker
+      <?=getenv('ALICE_DOCKER_VERSION', true)?>
+    </h5>
+  </header>
+  <section id="background">
+    <picture>
+      <img srcset="/img/alice-x1.png 1280w, /img/alice-x2.png 1920w, /img/alice-x3.png 2560w, /img/alice-x4.png 3840w"
+        src="/img/alice-x1.png" alt="">
+    </picture>
+  </section>
+  <div id="alice" class=".container">
+    <h1>work in progress</h1>
+    <ul>
+      <li>
+        <h5>
+          <a
+            href="http://<?=$_SERVER['SERVER_ADDR']?>:<?=getenv('CODE_SERVER_PORT')?>/?folder=<?=getenv('ALICE_HOME')?>/project_euler">Open
+            Project Euler</a>
+        </h5>
+      </li>
+      <li>
+        <h5>
+          <a
+            href="http://<?=$_SERVER['SERVER_ADDR']?>:<?=getenv('CODE_SERVER_PORT')?>/?folder=<?=getenv('ALICE_HOME')?>/project_euler/usr/rocher">Open
+            Project Euler / User rocher</a>
+        </h5>
+      </li>
+    </ul>
+  </div>
+</body>
+
 </html>

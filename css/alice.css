@@ -1,0 +1,17 @@
+header {
+    color: white;
+    background-color: #0061af;
+    box-shadow: 0 0 .2rem #0000001a, 0 .2rem .4rem #0003;
+    padding: 10pt;
+    padding-left: 10%;
+}
+
+#background {
+    position: absolute;
+    opacity: 40%;
+}
+
+#alice {
+    padding: 10pt;
+    position: absolute;
+}
