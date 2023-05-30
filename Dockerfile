@@ -9,6 +9,7 @@ ARG code_server_version=4.13.0
 ARG code_server_auth=none
 ARG code_server_port=47801
 
+ENV ALICE_DOCKER=0.1.1
 ENV PHP_FPM_VERSION=8.1
 ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
 ENV CODE_SERVER_PORT=${code_server_port}
