@@ -47,6 +47,41 @@ docker inspect --format {{.NetworkSettings.IPAddress}} alice
 ```
 
 
+### Docker management
+
+Few reminders:
+
+  * Stop / restart Alice docker:
+
+    ```sh
+    docker stop alice
+    ```
+
+    and:
+
+    ```sh
+    docker restart alice
+    ```
+
+  * Enter Wonderland to see what's inside:
+
+    ```sh
+    docker exec -it alice bash
+    ```
+
+  * Remove Alice docker container (stop it first) and docker image:
+
+    ```sh
+    docker rm alice
+    ```
+
+    and:
+
+    ```sh
+    docker image rm alice-adventures
+    ```
+
+
 
 ### Current version
 
