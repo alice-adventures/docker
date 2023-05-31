@@ -1,4 +1,6 @@
-<html lang="en" data-bn-theme="light">
+<!DOCTYPE html>
+
+<html lang="en" data-bs-theme="light">
 
 <head>
   <title>Alice in Dockerland</title>
@@ -12,43 +14,58 @@
 
   <!-- Compiled and minified bootstrap 5.3 -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <script src="/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="/css/alice.css">
 </head>
 
 <body>
 
-  <header>
-    <h5>Alice Docker
-      <?=getenv('ALICE_DOCKER_VERSION', true)?>
-    </h5>
-  </header>
-  <section id="background">
+  <div id="background">
     <picture>
       <img srcset="/img/alice-x1.png 1280w, /img/alice-x2.png 1920w, /img/alice-x3.png 2560w, /img/alice-x4.png 3840w"
-        src="/img/alice-x1.png" alt="">
+        src="/img/alice-x1.png" alt="" width="100%">
     </picture>
-  </section>
-  <div id="alice" class=".container">
-    <h1>work in progress</h1>
-    <ul>
-      <li>
-        <h5>
-          <a
-            href="http://<?=$_SERVER['SERVER_ADDR']?>:<?=getenv('CODE_SERVER_PORT')?>/?folder=<?=getenv('ALICE_HOME')?>/project_euler">Open
-            Project Euler</a>
-        </h5>
-      </li>
-      <li>
-        <h5>
-          <a
-            href="http://<?=$_SERVER['SERVER_ADDR']?>:<?=getenv('CODE_SERVER_PORT')?>/?folder=<?=getenv('ALICE_HOME')?>/project_euler/usr/rocher">Open
-            Project Euler / User rocher</a>
-        </h5>
-      </li>
-    </ul>
   </div>
+
+  <div class="px-4 py-5 my-5 mb-3 text-center">
+    <img src="/img/Alice_Adventures-top-right-light.png" width="300px">
+    <h1 class="display-3 mt-5 fw-bold text-body-emphasis">Welcome to Alice</h1>
+    <div class="col-lg-4 mx-auto">
+      <p class="lead mt-2 mb-5">
+        <b class="fw-bold">Alice</b> <i>Adventures for Learning and Inspiring Coding Excellence</i>
+      </p>
+      <p class="lead">
+        Alice is framework that empowers developers and enthusiasts to explore
+        the wonderland of Ada programming.
+      </p>
+      <p class="lead">
+        Alice is its early stages of development. Dive into the collection of
+        enchanting problem sources, engage in collaborative tea parties, and
+        unleash your coding creativity. Come to explore the rabbit holes of
+        possibilities!
+      </p>
+    </div>
+
+    <div class="col-lg-4 mx-auto py-3">
+      <h1 class="display-3 py-3 mt-5 fw-bold text-body-emphasis">Alice in <i>Dockerland</i></h1>
+      <p class="lead">
+        This Docker container is a fully functional installation of Alice: it
+        has everything you need to start exploring Alice and to keep working
+        with it in the future. New content updates can be applied seamlessly.
+      </p>
+    </div>
+
+    <div class="col-lg-4 mx-auto py-3">
+      <h1 class="display-3 py-3 mt-5 fw-bold text-body-emphasis">Current Status</i></h1>
+      <p class="lead">
+        This Docker container is a fully functional installation of Alice: it
+        has everything you need to start exploring Alice and to keep working
+        with it in the future. New content updates can be applied seamlessly.
+      </p>
+
+    </div>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
