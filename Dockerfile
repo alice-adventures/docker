@@ -2,18 +2,21 @@ FROM ubuntu:22.04
 
 ARG alire_version=1.2.2
 ARG user_name=guest
-ARG user_uid=1000
-ARG user_gid=1000
 ARG group_name=${user_name}
+ARG uid=1000
+ARG gid=1000
+ARG code_server=true
 ARG code_server_version=4.13.0
 ARG code_server_auth=none
+ARG code_server_password=1234
 ARG code_server_port=47801
 
 ENV ALICE_DOCKER_VERSION=0.1.1
 ENV ALICE_HOME=/home/${user_name}/alice
-ENV PHP_FPM_VERSION=8.1
-ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
+ENV CODE_SERVER=${code_server}
 ENV CODE_SERVER_PORT=${code_server_port}
+ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
+ENV PHP_FPM_VERSION=8.1
 
 
 ### Install required packages
@@ -48,10 +51,10 @@ RUN wget -nv https://github.com/alire-project/alire/releases/download/v${alire_v
     mv bin/alr /usr/local/bin/alr
 
 
-### Add user ${user_name}
+### Add user and group
 
-RUN groupadd --force --gid ${user_gid} ${group_name} &&\
-    useradd --create-home --home-dir /home/${user_name} --gid ${user_gid} --groups sudo,www-data --shell /bin/bash --uid ${user_uid} ${user_name} &&\
+RUN groupadd --force --gid ${gid} ${group_name} &&\
+    useradd --create-home --home-dir /home/${user_name} --gid ${gid} --groups sudo --shell /bin/bash --uid ${uid} ${user_name} &&\
     echo "${user_name}:${user_name}" | chpasswd &&\
     echo "root:root" | chpasswd &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
@@ -87,18 +90,29 @@ RUN curl -fOL https://github.com/coder/code-server/releases/download/v${code_ser
 WORKDIR /usr/local/bin
 RUN echo \
     "#!/bin/bash\n\
+    echo DISABLED"\
+    > start-code-server.sh && \
+    echo \
+    "#!/bin/bash\n\
+    echo DISABLED"\
+    > stop-code-server.sh
+
+RUN [ "${code_server}" = "false" ] || \
+    echo \
+    "#!/bin/bash\n\
     IP_ADDR=\$(ip address show dev eth0 | tr -s [:space:] | grep inet | cut -d' ' -f3 | cut -d/ -f1)\n\
+    export PASSWORD=\"${code_server_password}\"\n\
     code-server --auth ${code_server_auth}\
     --disable-telemetry\
     --bind-addr \$IP_ADDR:\$CODE_SERVER_PORT\
     --ignore-last-opened \
-    --disable-workspace-trust \
     --welcome-text 'Welcome to Alice in Dockerland'\
-    \$* >/tmp/code-server.log 2>&1 &\n\
+    \$* >/dev/null 2>&1 &\n\
     echo Please visit http://\$IP_ADDR:\$CODE_SERVER_PORT to access vscode"\
     > start-code-server.sh
 
-RUN echo \
+RUN [ "${code_server}" = "false" ] || \
+    echo \
     "#!/bin/bash\n\
     ps x | grep -e '/usr/.*/code-server' | grep -v grep | sed -e 's/  */ /g' | cut -d' ' -f2 | xargs -I{} kill -9 {} >/dev/null 2>&1"\
     > stop-code-server.sh
@@ -107,13 +121,14 @@ RUN chmod a+x start-code-server.sh stop-code-server.sh
 
 USER ${user_name}
 WORKDIR /home/${user_name}
-RUN code-server --install-extension Adacore.ada && \
+RUN [ "${code_server}" = "true" ] && \
+    code-server --install-extension Adacore.ada && \
     code-server --install-extension yzhang.markdown-all-in-one && \
     code-server --install-extension bungcip.better-toml && \
     code-server --install-extension mhutchie.git-graph
 
 
-### Change configurations
+### Change nginx & php configurations
 
 USER root
 WORKDIR /etc/nginx
@@ -140,7 +155,8 @@ RUN sed -e 's:pm = dynamic:pm = static:' \
 USER root
 WORKDIR /var/www
 RUN rm -rf html && \
-    git clone https://github.com/alice-adventures/docker.git -b html html
+    git clone https://github.com/alice-adventures/docker.git -b html html && \
+    cd html && git pull
 
 
 ### Entrypoint
