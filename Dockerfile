@@ -6,14 +6,12 @@ ARG group_name=${user_name}
 ARG uid=1000
 ARG gid=1000
 ARG code_server=true
-ARG code_server_version=4.13.0
 ARG code_server_auth=none
 ARG code_server_password=1234
 ARG code_server_port=47801
 
 ENV ALICE_DOCKER_VERSION=0.1.1
 ENV ALICE_HOME=/home/${user_name}/alice
-ENV CODE_SERVER=${code_server}
 ENV CODE_SERVER_PORT=${code_server_port}
 ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
 ENV PHP_FPM_VERSION=8.1
@@ -38,17 +36,10 @@ RUN DEBIAN_FRONTEND=noninteractive \
     php-fpm \
     ssh \
     sudo \
+    ttyd \
     unzip \
     websocketd \
     wget
-
-
-### Install Alire
-
-WORKDIR /tmp
-RUN wget -nv https://github.com/alire-project/alire/releases/download/v${alire_version}/alr-${alire_version}-bin-x86_64-linux.zip && \
-    unzip alr-${alire_version}-bin-x86_64-linux.zip && \
-    mv bin/alr /usr/local/bin/alr
 
 
 ### Add user and group
@@ -58,6 +49,14 @@ RUN groupadd --force --gid ${gid} ${group_name} &&\
     echo "${user_name}:${user_name}" | chpasswd &&\
     echo "root:root" | chpasswd &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+
+### Install Alire
+
+WORKDIR /tmp
+RUN wget -nv https://github.com/alire-project/alire/releases/download/v${alire_version}/alr-${alire_version}-bin-x86_64-linux.zip && \
+    unzip alr-${alire_version}-bin-x86_64-linux.zip && \
+    mv bin/alr /usr/local/bin/alr
 
 
 ### Install & Setup Alice
@@ -80,99 +79,44 @@ WORKDIR /home/${user_name}/alice/project_euler/usr/rocher
 RUN alr --non-interactive toolchain --select
 
 
-### Install code-server & additional packages
-
-USER root
-WORKDIR /tmp
-RUN curl -fOL https://github.com/coder/code-server/releases/download/v${code_server_version}/code-server_${code_server_version}_amd64.deb && \
-    dpkg -i code-server_${code_server_version}_amd64.deb
-
-WORKDIR /usr/local/bin
-RUN echo \
-    "#!/bin/bash\n\
-    echo DISABLED"\
-    > start-code-server.sh && \
-    echo \
-    "#!/bin/bash\n\
-    echo DISABLED"\
-    > stop-code-server.sh
-
-RUN [ "${code_server}" = "false" ] || \
-    echo \
-    "#!/bin/bash\n\
-    IP_ADDR=\$(ip address show dev eth0 | tr -s [:space:] | grep inet | cut -d' ' -f3 | cut -d/ -f1)\n\
-    export PASSWORD=\"${code_server_password}\"\n\
-    code-server --auth ${code_server_auth}\
-    --disable-telemetry\
-    --bind-addr \$IP_ADDR:\$CODE_SERVER_PORT\
-    --ignore-last-opened \
-    --welcome-text 'Welcome to Alice in Dockerland'\
-    \$* >/dev/null 2>&1 &\n\
-    echo Please visit http://\$IP_ADDR:\$CODE_SERVER_PORT to access vscode"\
-    > start-code-server.sh
-
-RUN [ "${code_server}" = "false" ] || \
-    echo \
-    "#!/bin/bash\n\
-    ps x | grep -e '/usr/.*/code-server' | grep -v grep | sed -e 's/  */ /g' | cut -d' ' -f2 | xargs -I{} kill -9 {} >/dev/null 2>&1"\
-    > stop-code-server.sh
-
-RUN chmod a+x start-code-server.sh stop-code-server.sh
-
-USER ${user_name}
-WORKDIR /home/${user_name}
-RUN [ "${code_server}" = "true" ] && \
-    code-server --install-extension Adacore.ada && \
-    code-server --install-extension yzhang.markdown-all-in-one && \
-    code-server --install-extension bungcip.better-toml && \
-    code-server --install-extension mhutchie.git-graph
-
-
-### Change nginx & php configurations
-
-USER root
-WORKDIR /etc/nginx
-RUN sed -e 's:worker_processes auto:worker_processes 1:' nginx.conf > nginx.conf.new && \
-    mv nginx.conf.new nginx.conf
-
-WORKDIR /etc/nginx/sites-available
-RUN sed -e 's:#.*location ~ \\.php:location ~ \\.(php|html):' \
-    -e 's:#.*include snippets/fastcgi-php.conf;:    include snippets/fastcgi-php.conf;:' \
-    -e "s=#.*fastcgi_pass unix:/run/php/.*$=    fastcgi_pass unix:${PHP_FPM_SOCKET}; }=" default > default.new && \
-    mv default.new default
-
-WORKDIR /etc/php/${PHP_FPM_VERSION}/fpm/pool.d
-RUN pwd
-RUN sed -e 's:pm = dynamic:pm = static:' \
-    -e 's:pm.max_children = 5:pm.max_children = 1:' \
-    -e 's:;clear_env = no:clear_env = no:' \
-    -e 's:;security.limit_extensions = .php:security.limit_extensions = .php .html:' www.conf > www.conf.new && \
-    mv www.conf.new www.conf
-
-
-### Install web pages
+### Install Alice web pages
 
 USER root
 WORKDIR /var/www
 RUN rm -rf html && \
-    git clone https://github.com/alice-adventures/docker.git -b html html && \
-    cd html && git pull
+    git clone https://github.com/alice-adventures/docker.git -b html html
 
 
-### Entrypoint
+### Download assets; change nginx & php configurations
 
 USER root
 WORKDIR /usr/local/bin
-RUN echo \
-    "#!/bin/bash\n\
-    sudo -E nginx\n\
-    sudo -E php-fpm${PHP_FPM_VERSION}\n\
-    start-code-server.sh\n\
-    /bin/bash"\
-    > entrypoint.sh
+RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/entrypoint.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/install-code-server.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/start-code-server.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/stop-code-server.sh && \
+    chmod a+x *.sh
 
-RUN chmod a+x entrypoint.sh
+WORKDIR /etc/nginx
+RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/nginx.conf
 
+WORKDIR /etc/nginx/sites-available
+RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/default
+
+WORKDIR /etc/php/${PHP_FPM_VERSION}/fpm/pool.d
+RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/php/www.conf
+
+
+### Install code-server & additional packages
+USER root
+WORKDIR /usr/local/bin
+RUN [ "${code_server}" = "true" ] && ./install-code-server.sh
+RUN [ "${code_server_auth}" = "password" ] && \
+    sed --in-place -e 's:--auth none:--auth password:' \
+                   -e 's—export PASSWORD=1234—export PASSWORD="${code_server_password}"—'
+
+
+### Entrypoint
 USER ${user_name}
 WORKDIR /home/${user_name}
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
