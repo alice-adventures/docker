@@ -75,7 +75,7 @@ RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/ass
 
 USER ${user_name}
 WORKDIR /home/${user_name}
-RUN /usr/bin/update-alire.sh
+RUN /usr/local/bin/update-alire.sh
 RUN alr --no-color index --reset-community
 RUN alr --no-color index --add=git+https://github.com/alice-adventures/alice-index --name=alice
 RUN alr --no-color index --update-all
