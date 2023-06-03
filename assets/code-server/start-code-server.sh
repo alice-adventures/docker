@@ -1,4 +1,4 @@
-#!/bin/bash\n\
+#!/bin/bash
 
 if [ -n "$(which code-server)" ]; then
     IP_ADDR=$(ip address show dev eth0 | tr -s [:space:] | grep inet | cut -d' ' -f3 | cut -d/ -f1)
