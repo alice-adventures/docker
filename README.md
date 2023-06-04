@@ -99,17 +99,12 @@ docker inspect --format {{.NetworkSettings.IPAddress}} alice
 
 ### Docker management
 
-Few reminders:
+Some reminders:
 
   * Stop / restart Alice docker:
 
     ```sh
     docker stop alice
-    ```
-
-    and:
-
-    ```sh
     docker restart alice
     ```
 
@@ -119,24 +114,20 @@ Few reminders:
     docker exec -it alice bash
     ```
 
-  * Remove Alice docker container (stop it first) and docker image:
-
-    ```sh
-    docker rm alice
-    ```
-
-    and:
-
-    ```sh
-    docker image rm alice-adventures
-    ```
-
-
 
 ### Current version
 
 Current Alice docker version is `0.1.1`.
 
+
+### Planned for future releases
+
+  * Optionally include GNAT Studio community release
+
+  * Optionally skip automatic setup of Alire and Alice and explain step by step
+    all required work once the docker starts.
+
+  * Better support for exploring problem sources and provided solutions.
 
 ---
 ### License
