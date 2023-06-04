@@ -8,7 +8,7 @@ if [ -n "$(which code-server)" ]; then
                 --bind-addr $IP_ADDR:$CODE_SERVER_PORT \
                 --ignore-last-opened \
                 --welcome-text 'Welcome to Alice in Dockerland' \
-                \$* >/dev/null 2>&1 &
+                $* >/dev/null 2>&1 &
     echo Please visit http://$IP_ADDR:$CODE_SERVER_PORT to access vscode
 else
     echo "Error: code-server not found"
