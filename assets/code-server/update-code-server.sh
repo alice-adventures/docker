@@ -26,10 +26,16 @@ fi
 if [ -f $LATEST_RELEASE_FILE ]; then
     sudo apt install -y ./$LATEST_RELEASE_FILE
 
-    code-server --install-extension Adacore.ada
-    code-server --install-extension yzhang.markdown-all-in-one
-    code-server --install-extension bungcip.better-toml
-    code-server --install-extension mhutchie.git-graph
+    mkdir -p $HOME/.vscode-server/data/
+    mkdir -p $HOME/.vscode-server/extensions/
+    CODE_SERVER_DIRS="--user-data-dir  $HOME/.vscode-server/data/ \
+                      --extensions-dir $HOME/.vscode-server/extensions/"
+
+    code-server ${CODE_SERVER_DIRS} --install-extension Adacore.ada
+    code-server ${CODE_SERVER_DIRS} --install-extension bungcip.better-toml
+    code-server ${CODE_SERVER_DIRS} --install-extension mhutchie.git-graph
+    code-server ${CODE_SERVER_DIRS} --install-extension webfreak.debug
+    code-server ${CODE_SERVER_DIRS} --install-extension yzhang.markdown-all-in-one
 else
     echo "Error: could not find $LATEST_RELEASE_FILE"
 fi
