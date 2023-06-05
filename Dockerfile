@@ -22,14 +22,16 @@ RUN apt update
 RUN DEBIAN_FRONTEND=noninteractive \
     apt install -y --no-install-recommends \
     apt-utils \
+    bash-completion \
+    build-essential \
     ca-certificates \
     curl \
     dialog \
-    bash-completion \
-    build-essential \
-    less \
+    gdb \
     git \
     iproute2 \
+    less \
+    libsecret-1-0 \
     media-types \
     nginx-light \
     php-fpm \
