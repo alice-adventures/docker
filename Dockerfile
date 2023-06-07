@@ -63,6 +63,10 @@ RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/ass
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/start-code-server.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/stop-code-server.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/update-code-server.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/start-nginx.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/stop-nginx.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/start-ttyd.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/stop-ttyd.sh && \
     chmod a+x *.sh
 
 WORKDIR /etc/nginx
