@@ -25,6 +25,7 @@ fi
 # install latest version
 if [ -f $LATEST_RELEASE_FILE ]; then
     sudo apt install -y ./$LATEST_RELEASE_FILE
+    rm -f $LATEST_RELEASE_FILE
 
     mkdir -p $HOME/.vscode-server/data/
     mkdir -p $HOME/.vscode-server/extensions/

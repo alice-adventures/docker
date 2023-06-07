@@ -25,5 +25,6 @@ fi
 # install latest version
 if [ -f $LATEST_RELEASE_FILE ]; then
     unzip $LATEST_RELEASE_FILE
+    rm -f $LATEST_RELEASE_FILE
     sudo mv bin/alr /usr/local/bin/alr
 fi
