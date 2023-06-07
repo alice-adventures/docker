@@ -111,16 +111,18 @@ RUN rm -rf html && \
     git clone https://github.com/alice-adventures/docker.git -b html html
 
 
-### Install & setup code-server
+### Setup & update code-server
 
 USER root
 WORKDIR /usr/local/bin
-RUN [ "${code_server}" = "false" ] || ./update-code-server.sh
 RUN sed --in-place \
     -e "s:auth none:auth ${code_server_auth}:" \
     -e "s:export PASSWORD=1234:export PASSWORD=\"${code_server_password}\":" \
     start-code-server.sh
 
+USER ${user_name}
+WORKDIR /home/${user_name}
+RUN [ "${code_server}" = "false" ] || /usr/local/bin/update-code-server.sh
 
 ### Entrypoint
 USER ${user_name}
