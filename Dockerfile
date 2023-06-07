@@ -24,6 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt install -y --no-install-recommends \
     apt-utils \
     bash-completion \
+    btop \
     build-essential \
     ca-certificates \
     curl \
