@@ -7,7 +7,6 @@ ARG gid=1000
 ARG code_server=true
 ARG code_server_auth=none
 ARG code_server_password=1234
-ARG code_server_port=47801
 
 ENV ALICE_DOCKER_VERSION=0.1.1
 ENV ALICE_HOME=/home/${user_name}/alice

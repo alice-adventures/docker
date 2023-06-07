@@ -50,12 +50,11 @@ docker build --build-arg VARIABLE=VALUE --build-arg FOO=BAR  ...
     tailored version of [vscode](https://code.visualstudio.com/) to enable
     remote development. These variables will hel you with the installation:
 
-    | variable               | default value                                  |
-    |------------------------|------------------------------------------------|
-    | `code_server`          | `true`, set it to `false` to skip installation |
-    | `code_server_auth`     | `none` or `password`                           |
-    | `code_server_password` | `1234`    (only numbers, letters, and '_')     |
-    | `code_server_port`     | `47801`                                        |
+    | variable               | default value / notes                   |
+    |------------------------|-----------------------------------------|
+    | `code_server`          | `true` / `false` skips installation     |
+    | `code_server_auth`     | `none` / can be set to `password`       |
+    | `code_server_password` | `1234` / only numbers, letters, and '_' |
 
     Notes:
 
