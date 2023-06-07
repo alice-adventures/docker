@@ -10,7 +10,7 @@ ARG code_server_password=1234
 
 ENV ALICE_DOCKER_VERSION=0.1.1
 ENV ALICE_HOME=/home/${user_name}/alice
-ENV CODE_SERVER_PORT=${code_server_port}
+ENV CODE_SERVER_PORT=47801
 ENV LC_ALL=C.UTF8
 ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
 ENV PHP_FPM_VERSION=8.1
