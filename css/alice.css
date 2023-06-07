@@ -14,11 +14,10 @@
 
 #alice {
     padding-top: 88px;
-    top: 77px;
 }
 
-#terminal {
-    border: solid 1px #999 !important;
+#tty {
+    border: solid 1px #999;
     height: 400px;
-    width: 77%;
+    width: 77% !important;
 }
