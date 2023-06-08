@@ -2,7 +2,7 @@
 
 RELEASES_URL="https://api.github.com/repos/coder/code-server/releases"
 
-# check latest version
+# check latest release
 LATEST_RELEASE_URL=$( \
       curl -L $RELEASES_URL 2>/dev/null \
     | grep 'browser_download_url.*_amd64\.deb' \
@@ -13,7 +13,7 @@ LATEST_RELEASE_FILE=$(basename $LATEST_RELEASE_URL)
 
 cd /tmp
 
-# download latest version
+# download latest release
 if [ ! -f $LATEST_RELEASE_FILE ]; then
     sudo rm -f code-server*
     curl -fOL $LATEST_RELEASE_URL
@@ -22,7 +22,7 @@ if [ ! -f $LATEST_RELEASE_FILE ]; then
     fi
 fi
 
-# install latest version
+# install latest release
 if [ -f $LATEST_RELEASE_FILE ]; then
     sudo apt install -y ./$LATEST_RELEASE_FILE
     rm -f $LATEST_RELEASE_FILE
