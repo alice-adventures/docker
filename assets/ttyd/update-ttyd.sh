@@ -24,4 +24,5 @@ fi
 # install latest release
 if [ -f $LATEST_RELEASE_FILE ]; then
     sudo mv ttyd* /usr/bin/ttyd
+    sudo chmod a+x /usr/bin/ttyd
 fi
