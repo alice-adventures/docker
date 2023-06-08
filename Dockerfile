@@ -38,7 +38,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
     php-fpm \
     ssh \
     sudo \
-    ttyd \
     unzip \
     websocketd \
     wget
@@ -66,6 +65,7 @@ RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/ass
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/stop-nginx.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/start-ttyd.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/stop-ttyd.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/update-ttyd.sh && \
     chmod a+x *.sh
 
 WORKDIR /etc/nginx
@@ -110,6 +110,13 @@ RUN rm -rf html && \
     git clone https://github.com/alice-adventures/docker.git -b html html
 
 
+### Install ttyd
+
+USER ${user_name}
+WORKDIR /home/${user_name}
+RUN /usr/local/bin/update-ttyd.sh
+
+
 ### Setup & update code-server
 
 USER root
@@ -123,7 +130,9 @@ USER ${user_name}
 WORKDIR /home/${user_name}
 RUN [ "${code_server}" = "false" ] || /usr/local/bin/update-code-server.sh
 
+
 ### Entrypoint
+
 USER ${user_name}
 WORKDIR /home/${user_name}
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
