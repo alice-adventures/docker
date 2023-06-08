@@ -38,12 +38,13 @@ docker build --build-arg VARIABLE=VALUE --build-arg FOO=BAR  ...
   * If you plan to share docker volumes with your host, these variables will
     help you with the integration
 
-    | variable     | default value                                |
+    | variable     | default value / notes                        |
     |--------------|----------------------------------------------|
     | `user_name`  | `guest`                                      |
-    | `group_name` | `${user_name}` — also member of group `sudo` |
+    | `group_name` | `${user_name}` / also member of group `sudo` |
     | `uid`        | `1000`                                       |
     | `gid`        | `1000`                                       |
+    | `timezone`   | `UTC` / e.g. `CET`, `UTC+2`, `GMT-5`         |
 
   * This docker installs by default  a copy of
     [code-server](https://code.visualstudio.com/docs/remote/vscode-server), a

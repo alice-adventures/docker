@@ -4,6 +4,7 @@ ARG user_name=guest
 ARG group_name=${user_name}
 ARG uid=1000
 ARG gid=1000
+ARG timezone=UTC
 ARG code_server=true
 ARG code_server_auth=none
 ARG code_server_password=1234
@@ -14,6 +15,7 @@ ENV CODE_SERVER_PORT=47801
 ENV LC_ALL=C.UTF8
 ENV PHP_FPM_SOCKET=/run/php/php8.1-fpm.sock
 ENV PHP_FPM_VERSION=8.1
+ENV TZ=${timezone}
 
 
 ### Install required packages
