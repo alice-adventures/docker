@@ -61,6 +61,9 @@ function tty_setThemeDark() {
         "green": "#5ea702",
         "magenta": "#89658e",
         "red": "#d81e00",
+        "selectionBackground": "#264f78",
+        "selectionForeground": "#d2d2d2",
+        "selectionInactiveBackground": "3a3d41",
         "white": "#dbded8",
         "yellow": "#cfae00",
     });
@@ -86,6 +89,9 @@ function tty_setThemeLight() {
         "green": "#00bc00",
         "magenta": "#bc05bc",
         "red": "#cd3131",
+        "selectionBackground": "#add6ff",
+        "selectionForeground": "#434343",
+        "selectionInactiveBackground": "#e5ebf1",
         "white": "#555555",
         "yellow": "#949800",
     });
