@@ -12,7 +12,8 @@ function tty_initTerminal() {
     tty_terminalTextArea = ttyFrame.contentDocument.querySelector("textarea.xterm-helper-textarea");
     tty_terminal = ttyFrame.contentWindow.term;
     tty_setThemeLight();
-    ttyFrame.setAttribute("class", "visible");
+    ttyFrame.classList.remove("invisible");
+    ttyFrame.classList.add("visible");
 }
 
 function tty_disableInput() {
@@ -43,7 +44,7 @@ function tty_sendCommand(cmd) {
 }
 
 function tty_setThemeDark() {
-    tty_terminal.setOption("theme", {
+    tty_terminal.options.theme = {
         "background": "#151515",
         "black": "#000000",
         "blue": "#427ab3",
@@ -66,12 +67,12 @@ function tty_setThemeDark() {
         "selectionInactiveBackground": "3a3d41",
         "white": "#dbded8",
         "yellow": "#cfae00",
-    });
+    };
 
 }
 
 function tty_setThemeLight() {
-    tty_terminal.setOption("theme", {
+    tty_terminal.options.theme = {
         "background": "#f8f8f8",
         "black": "#000000",
         "blue": "#0451a5",
@@ -94,5 +95,5 @@ function tty_setThemeLight() {
         "selectionInactiveBackground": "#e5ebf1",
         "white": "#555555",
         "yellow": "#949800",
-    });
+    };
 }

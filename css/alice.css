@@ -17,7 +17,6 @@
 }
 
 #tty {
-    border: solid 1px #999;
-    height: 400px;
-    width: 77% !important;
+    width: 900px;
+    height: 600px;
 }
