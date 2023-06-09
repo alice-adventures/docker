@@ -1,19 +1,31 @@
 
-let tty_terminalTextArea = null;
-let tty_terminal = null;
+let tty_frame = null;
 let tty_isDisabled = false;
+let tty_terminal = null;
+let tty_terminalTextArea = null;
+let tty_xterm = null;
 
 function tty_onLoad() {
     setTimeout(() => tty_initTerminal(), 1000);
 }
 
 function tty_initTerminal() {
-    let ttyFrame = document.getElementById("tty");
-    tty_terminalTextArea = ttyFrame.contentDocument.querySelector("textarea.xterm-helper-textarea");
-    tty_terminal = ttyFrame.contentWindow.term;
+    tty_frame = document.getElementById("tty");
+    tty_terminalTextArea = tty_frame.contentDocument.querySelector("textarea.xterm-helper-textarea");
+    tty_terminal = tty_frame.contentWindow.term;
+    tty_xterm = tty_frame.contentDocument.getElementsByClassName("terminal xterm")[0];
+
     tty_setThemeLight();
-    ttyFrame.classList.remove("invisible");
-    ttyFrame.classList.add("visible");
+    // tty_xterm.addEventListener("focus", (event) => {
+    //     tty_frame.classList.remove("border-secondary");
+    //     tty_frame.classList.add("border-primary")
+    // });
+    // tty_xterm.addEventListener("blur", (event) => {
+    //     tty_frame.classList.add("border-secondary");
+    //     tty_frame.classList.remove("border-primary")
+    // });
+    tty_frame.classList.remove("invisible");
+    tty_frame.classList.add("visible");
 }
 
 function tty_disableInput() {
