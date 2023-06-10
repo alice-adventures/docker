@@ -7,7 +7,7 @@ if [ -n "$(which code-server)" ]; then
     code-server $CODE_SERVER_DIRS \
                 --auth none \
                 --disable-telemetry \
-                --bind-addr localhost:$CODE_SERVER_PORT \
+                --bind-addr localhost:${CODE_SERVER_PORT:-47801} \
                 --ignore-last-opened \
                 --welcome-text 'Welcome to Alice in Dockerland' \
                 $* >/dev/null 2>&1 &
