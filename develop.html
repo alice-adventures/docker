@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <?php include_once("head.html")?>
+    <link href="/css/sidebar.css" rel="stylesheet">
+</head>
+
+<body>
+    <main class="d-flex flex-nowrap">
+        <div class="position absolute h-100 p-3 text-bg-dark" style="width: 280px;">
+            <span class="fs-3 display-3">Develop in Alice</span>
+            <hr>
+            <ul id="menu" class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <h4 class="ms-3 mt-3 mb-3">
+                        Project Euler
+                    </h4>
+                </li>
+                <li class="nav-item">
+                    <a id="menu-home" data-frame="contents" data-activity="" href="#" onclick="menu_click(event)"
+                        class="nav-link text-white active">
+                        Home
+                    </a>
+                </li>
+                <div class="ms-4">
+                    <li>
+                        <a id="menu-dashboard" data-frame="contents" data-activity="" href="#"
+                            onclick="menu_click(event)" class="nav-link text-white">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a id="menu-others" data-frame="contents" data-activity="" href="#" onclick="menu_click(event)"
+                            class="nav-link text-white">
+                            Orders
+                        </a>
+                    </li>
+                </div>
+                <li>
+                    <a id="menu-products" data-frame="solution" data-activity="/solution" href="#"
+                        onclick="menu_click(event)" class="nav-link text-white">
+                        Open solution
+                    </a>
+                </li>
+                <li>
+                    <a id="menu-code-server" data-frame="code"
+                        data-activity="/code?folder=<?=getenv('ALICE_HOME')?>/project_euler" href="#"
+                        onclick="menu_click(event)" class="nav-link text-white">
+                        Open code-server
+                    </a>
+                </li>
+                <li>
+                    <a id="menu-products" data-frame="tty" data-activity="/tty" href="#" onclick="menu_click(event)"
+                        class="nav-link text-white">
+                        Open console
+                    </a>
+                </li>
+            </ul>
+            <script type="text/javascript">
+                let frame = null;
+                function menu_click(e) {
+                    if (e.buttons == 0) {
+                        let menu = document.getElementById("menu");
+                        let active = menu.querySelector(".active");
+                        let activities = document.getElementById("activities");
+
+                        if (active != e.target) {
+                            active.classList.remove("active");
+                            e.target.classList.add("active");
+
+                            if (frame != null) {
+                                frame.classList.remove("z-3");
+                                frame.classList.add("z-0");
+                            }
+                            let target_frame = activities.querySelector("#" + e.target.attributes["data-frame"].value);
+                            if (target_frame.src === "" || target_frame === contents) {
+                                target_frame.src = e.target.attributes["data-activity"].value;
+                                if (target_frame == tty) {
+                                    tty_onLoad();
+                                }
+                            }
+                            target_frame.classList.remove("z-0");
+                            target_frame.classList.add("z-3");
+                            frame = target_frame;
+                            console.log(target_frame.src);
+                        }
+                    }
+                }
+            </script>
+            <!-- <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" class="rounded-circle me-2" width="32" height="32">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div> -->
+        </div>
+        <div id="activities" class="z-0 h-100 position-absolute" style="left:280px;right:0;">
+            <div class="z-1 position-absolute h-100 text-bg-secondary h-100 w-100"></div>
+            <iframe id="solution" class="z-0 position-absolute h-100 w-100"></iframe>
+            <iframe id="contents" class="z-0 position-absolute h-100 w-100"></iframe>
+            <iframe id="code" class="z-0 position-absolute h-100 mw-100 w-100"></iframe>
+            <script src="/js/tty.js"></script>
+            <iframe id="tty" class="z-0 invisible position-absolute h-100 w-100"></iframe>
+        </div>
+    </main>
+</body>
+
+</html>
