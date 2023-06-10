@@ -2,23 +2,7 @@
 
 <html lang="en" data-bs-theme="light">
 
-<head>
-  <title>Alice in Dockerland</title>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-
-  <!-- Compiled and minified bootstrap 5.3 -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <script src="/js/bootstrap.bundle.min.js"></script>
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,300i,400,400i,500,500i">
-  <link rel="stylesheet" href="/css/alice.css">
-</head>
+<?=include_once("head.html")?>
 
 <body data-bs-theme="light">
 
@@ -102,23 +86,40 @@
   <div class="my-5 p-5 d-flex flew-row justify-content-center">
     <div
       class="text-end col-lg-3 m-3 p-5 bg-primary bg-opacity-10 text-dark border border-2 border-primary-subtle rounded-start-pill">
-      <h1 class="display-5"><a href="developer.html" class="link-primary">Develop in Alice</a></h1>
+      <h1 class="display-5"><a href="develop.html" class="link-primary">Develop in Alice</a></h1>
       <div class="ms-5 ps-5 mt-4">
         <p class="lead">
           Implement existing functionality using different libraries.
         </p>
         <p class="lead">
-          Develop support for new Problem Sources.
+          Develop support for new Problem Sources by adding new interfaces that
+          are better suited to them.
+        </p>
+        <p class="lead">
+          Implement new data structures and algorithms that Participants can use
+          to solve programming challenges.
+        </p>
+        <p class="lead">
+          Create code sharing guidelines for Participants to follow when sharing
+          their code on Alice.
         </p>
       </div>
     </div>
     <div
       class="text-start col-lg-3 m-3 p-5 bg-primary bg-opacity-10 text-dark border border-2 border-primary-subtle rounded-end-pill">
-      <h1 class="display-5"><a href="participant.html" class="link-primary">Participate in Alice</a></h1>
+      <h1 class="display-5"><a href="participate.html" class="link-primary">Participate in Alice</a></h1>
       <p class="lead me-5 pe-5 mt-4">
-        This Docker container is a fully functional installation of Alice: it
-        has everything you need to start exploring Alice and to keep working
-        with it in the future. New content updates can be applied seamlessly.
+        Solve Problem challenges and explore new solutions by using parallelism,
+        parametrize algorithm behavior or changing initial conditions.
+      </p>
+      <p class="lead me-5 pe-5 mt-4">
+        Learn Ada by example: understand what other participants have developed
+        and improve the designs or implementations shared by others.
+      </p>
+      <p class="lead me-5 pe-5 mt-4">
+        When there is GUI support for a Problem Source, create graphical
+        explanations tow show how your algorithm works, the search space is
+        explored or whatever you can imagine.
       </p>
     </div>
   </div>
