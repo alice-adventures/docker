@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <script src="/js/bootstrap.bundle.min.js"></script>
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,300i,400,400i,500,500i">
   <link rel="stylesheet" href="/css/alice.css">
 </head>
 
@@ -28,46 +29,93 @@
     </picture>
   </div>
 
-  <div class="px-4 py-5 my-5 mb-3 text-center">
-    <div class="px-4 py-5 my-5 mb-3 text-center">
-      <img src="/img/Alice_Adventures-top-right-light.png" width="400px">
-    </div>
-  </div>
-
-  <div class="bg-body-secondary" style="--bs-bg-opacity: 0.4;">
-    <div class="px-4 py-5 my-5 mb-3 text-center">
-      <h1 class="display-3 mt-5 fw-bold text-body-emphasis">Welcome to Alice</h1>
-      <div class="col-lg-5 mx-auto">
-        <p class="lead mt-2 mb-5">
-          <b class="fw-bold">Alice</b> <i>Adventures for Learning and Inspiring Coding Excellence</i>
-        </p>
-        <p class="lead">
-          Alice is framework that empowers developers and enthusiasts to explore
-          the wonderland of Ada programming.
-        </p>
-        <p class="lead">
-          Alice is its early stages of development. Dive into the collection of
-          enchanting problem sources, engage in collaborative tea parties, and
-          unleash your coding creativity. Come to explore the rabbit holes of
-          possibilities!
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-5 mx-auto py-3">
-    <h1 class="display-3 py-3 mt-5 fw-bold text-body-emphasis">Alice in <i>Dockerland</i></h1>
-    <p class="lead">
-      This Docker container is a fully functional installation of Alice: it
-      has everything you need to start exploring Alice and to keep working
-      with it in the future. New content updates can be applied seamlessly.
+  <div class="mt-5 pt-5 pb-3 text-center">
+    <img src="/img/Alice_Adventures-top-right-light.png" width="400px">
+    <p class="fst-italic">in Dockerland &nbsp;
+      <?=getenv('ALICE_DOCKER_VERSION')?>
     </p>
   </div>
 
-  <div class="bg-body-secondary" style="--bs-bg-opacity: 0.4;">
-    <div class="col-lg-5 mx-auto py-3">
-      <h1 class="display-3 py-3 mt-5 fw-bold text-body-emphasis">Current Status</i></h1>
+  <div class="my-5 p-5 text-start bg-secondary bg-opacity-10 text-dark">
+    <div class="col-lg-3 mx-auto">
+      <h1 class="display-3">Welcome to Alice</h1>
+      <p class="lead mt-2 mb-5">
+        <b class="fw-bold">Alice</b> <i>Adventures for Learning and Inspiring Coding Excellence</i>
+      </p>
       <p class="lead">
+        Alice is framework that empowers developers and enthusiasts to explore
+        the wonderland of Ada programming.
+      </p>
+      <p class="lead">
+        Alice is its early stages of development. Dive into the collection of
+        enchanting problem sources, engage in collaborative tea parties, and
+        unleash your coding creativity. Come to explore the rabbit holes of
+        possibilities!
+      </p>
+    </div>
+  </div>
+
+  <div class="my-5 p-5 text-end">
+    <div class="col-lg-3 mx-auto">
+      <h1 class="display-3">Alice in Dockerland</h1>
+      <p class="lead">
+        This Docker container is a fully functional installation of Alice: it
+        has everything you need to start exploring Alice and to keep working
+        with it in the future. New content updates can be applied seamlessly.
+      </p>
+    </div>
+  </div>
+
+  <div class="my-5 p-5 text-start bg-secondary bg-opacity-10 text-dark">
+    <div class="col-lg-3 mx-auto">
+      <h1 class="display-3">Current Status</i></h1>
+      <ul>
+        <li>
+          <p class="lead">
+            Current supported problem source is <a href="https://projecteuler.net">Project Euler</a>.
+          </p>
+        </li>
+        <li>
+          <p class="lead">
+            Support for
+            <a href="https://checkio.org/">Checkio</a> is under development.
+          </p>
+        </li>
+        <li>
+          <p class="lead">
+            There are plans to support <a href="https://adventofcode.com">Advent of Code</a>,
+            <a href="https://www.codingame.com">Codingame</a> and <a href="https://rosettacode.org">Rosseta Code</a>
+            really
+            soon.
+          </p>
+        </li>
+        <li>
+          <p class="lead">
+            Any additional Problem Source you would like to have, please let us
+            know.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="my-5 p-5 d-flex flew-row justify-content-center">
+    <div
+      class="text-end col-lg-3 m-3 p-5 bg-primary bg-opacity-10 text-dark border border-2 border-primary-subtle rounded-start-pill">
+      <h1 class="display-5"><a href="developer.html" class="link-primary">Develop in Alice</a></h1>
+      <div class="ms-5 ps-5 mt-4">
+        <p class="lead">
+          Implement existing functionality using different libraries.
+        </p>
+        <p class="lead">
+          Develop support for new Problem Sources.
+        </p>
+      </div>
+    </div>
+    <div
+      class="text-start col-lg-3 m-3 p-5 bg-primary bg-opacity-10 text-dark border border-2 border-primary-subtle rounded-end-pill">
+      <h1 class="display-5"><a href="participant.html" class="link-primary">Participate in Alice</a></h1>
+      <p class="lead me-5 pe-5 mt-4">
         This Docker container is a fully functional installation of Alice: it
         has everything you need to start exploring Alice and to keep working
         with it in the future. New content updates can be applied seamlessly.
