@@ -2,8 +2,8 @@
 
 if [ -n "$(which code-server)" ]; then
     export PASSWORD=1234
-    CODE_SERVER_DIRS="--user-data-dir  $HOME/.vscode-server/data/ \
-                      --extensions-dir $HOME/.vscode-server/extensions"
+    CODE_SERVER_DIRS="--user-data-dir  $HOME/.config/Code/User/ \
+                      --extensions-dir $HOME/.vscode/extensions/"
     code-server $CODE_SERVER_DIRS \
                 --auth none \
                 --disable-telemetry \

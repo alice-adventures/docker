@@ -27,10 +27,10 @@ if [ -f $LATEST_RELEASE_FILE ]; then
     sudo apt install -y ./$LATEST_RELEASE_FILE
     rm -f $LATEST_RELEASE_FILE
 
-    mkdir -p $HOME/.vscode-server/data/
-    mkdir -p $HOME/.vscode-server/extensions/
-    CODE_SERVER_DIRS="--user-data-dir  $HOME/.vscode-server/data/ \
-                      --extensions-dir $HOME/.vscode-server/extensions/"
+    mkdir -p $HOME/.config/Code/User/
+    mkdir -p $HOME/.vscode/extensions/
+    CODE_SERVER_DIRS="--user-data-dir  $HOME/.config/Code/User/ \
+                      --extensions-dir $HOME/.vscode/extensions/"
 
     code-server ${CODE_SERVER_DIRS} --install-extension Adacore.ada
     code-server ${CODE_SERVER_DIRS} --install-extension bungcip.better-toml
