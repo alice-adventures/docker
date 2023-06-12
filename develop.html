@@ -12,50 +12,36 @@
         <div class="position absolute h-100 p-3 text-bg-dark" style="width: 280px;">
             <span class="fs-3 display-3">Develop in Alice</span>
             <hr>
-            <ul id="menu" class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+            <ul id="menu" class="nav nav-pills nav-fill flex-column mb-auto">
+                <li class="nav-item text-start">
                     <h4 class="ms-3 mt-3 mb-3">
                         Project Euler
                     </h4>
                 </li>
                 <li class="nav-item">
-                    <a id="menu-home" data-frame="contents" data-activity="" href="#" onclick="menu_click(event)"
-                        class="nav-link text-white active">
+                    <button class="nav-link text-start text-white active" data-frame="contents" data-activity=""
+                        onclick="menu_click(event)">
                         Home
-                    </a>
+                    </button>
                 </li>
-                <div class="ms-4">
-                    <li>
-                        <a id="menu-dashboard" data-frame="contents" data-activity="" href="#"
-                            onclick="menu_click(event)" class="nav-link text-white">
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a id="menu-others" data-frame="contents" data-activity="" href="#" onclick="menu_click(event)"
-                            class="nav-link text-white">
-                            Orders
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a id="menu-products" data-frame="solution" data-activity="/solution" href="#"
-                        onclick="menu_click(event)" class="nav-link text-white">
+                <li class="nav-item">
+                    <button class="nav-link text-start text-white" data-frame="solution" data-activity="/solution"
+                        onclick="menu_click(event)">
                         Open solution
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a id="menu-code-server" data-frame="code"
-                        data-activity="/code?folder=<?=getenv('ALICE_HOME')?>/project_euler" href="#"
-                        onclick="menu_click(event)" class="nav-link text-white">
+                <li class="nav-item">
+                    <button class="nav-link text-start text-white" data-frame="code"
+                        data-activity="/code?folder=<?=getenv('ALICE_HOME')?>/project_euler"
+                        onclick="menu_click(event)">
                         Open code-server
-                    </a>
+                    </button>
                 </li>
-                <li>
-                    <a id="menu-products" data-frame="tty" data-activity="/tty" href="#" onclick="menu_click(event)"
-                        class="nav-link text-white">
+                <li class="nav-item">
+                    <button class="nav-link text-start text-white" data-frame="tty" data-activity="/tty"
+                        onclick="menu_click(event)">
                         Open console
-                    </a>
+                    </button>
                 </li>
             </ul>
             <script type="text/javascript">
@@ -75,16 +61,17 @@
                                 frame.classList.add("z-0");
                             }
                             let target_frame = activities.querySelector("#" + e.target.attributes["data-frame"].value);
-                            if (target_frame.src === "" || target_frame === contents) {
-                                target_frame.src = e.target.attributes["data-activity"].value;
-                                if (target_frame == tty) {
+                            if (target_frame.contentWindow.location.href === "about:blank" || target_frame === contents) {
+                                target_frame.contentWindow.location.replace(e.target.attributes["data-activity"].value);
+                                if (target_frame === tty) {
                                     tty_onLoad();
                                 }
                             }
                             target_frame.classList.remove("z-0");
                             target_frame.classList.add("z-3");
                             frame = target_frame;
-                            console.log(target_frame.src);
+                            console.log(target_frame);
+                            console.log(target_frame.contentWindow.location.href);
                         }
                     }
                 }
@@ -108,9 +95,8 @@
             </div> -->
         </div>
         <div id="activities" class="z-0 h-100 position-absolute" style="left:280px;right:0;">
-            <div class="z-1 position-absolute h-100 text-bg-secondary h-100 w-100"></div>
+            <iframe id="contents" class="z-3 position-absolute h-100 w-100"></iframe>
             <iframe id="solution" class="z-0 position-absolute h-100 w-100"></iframe>
-            <iframe id="contents" class="z-0 position-absolute h-100 w-100"></iframe>
             <iframe id="code" class="z-0 position-absolute h-100 mw-100 w-100"></iframe>
             <script src="/js/tty.js"></script>
             <iframe id="tty" class="z-0 invisible position-absolute h-100 w-100"></iframe>
