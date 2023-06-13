@@ -88,6 +88,7 @@ RUN /usr/local/bin/update-alire.sh
 RUN alr --no-color index --reset-community
 RUN alr --no-color index --add=git+https://github.com/alice-adventures/alice-index --name=alice
 RUN alr --no-color index --update-all
+RUN alr --no-color --non-interactive toolchain --select
 
 
 ### Install & setup Alice
@@ -102,9 +103,6 @@ RUN git clone https://github.com/alice-adventures/project_euler.git
 
 WORKDIR /home/${user_name}/alice/project_euler
 RUN ./action/usr-setup.sh
-
-WORKDIR /home/${user_name}/alice/project_euler/usr/rocher
-RUN alr --non-interactive toolchain --select
 
 USER root
 WORKDIR /var/www
