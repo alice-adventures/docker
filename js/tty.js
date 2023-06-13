@@ -55,6 +55,10 @@ function tty_sendCommand(cmd) {
     disabled && tty_disableInput();
 }
 
+function tty_clear() {
+    tty_sendCommand("clear");
+}
+
 function tty_setThemeDark() {
     tty_terminal.options.theme = {
         "background": "#151515",
