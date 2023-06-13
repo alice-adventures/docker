@@ -35,6 +35,7 @@ if [ -f $LATEST_RELEASE_FILE ]; then
     code-server ${CODE_SERVER_DIRS} --install-extension Adacore.ada
     code-server ${CODE_SERVER_DIRS} --install-extension bungcip.better-toml
     code-server ${CODE_SERVER_DIRS} --install-extension mhutchie.git-graph
+    code-server ${CODE_SERVER_DIRS} --install-extension webfreak.debug
     code-server ${CODE_SERVER_DIRS} --install-extension yzhang.markdown-all-in-one
 else
     echo "Error: could not find $LATEST_RELEASE_FILE"
