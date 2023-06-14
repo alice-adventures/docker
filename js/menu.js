@@ -6,32 +6,47 @@ function menu_click(event) {
         let is_active = menu.querySelector(".active");
         let activities = document.getElementById("activities");
 
-        // get the target frame and window elements
-        let target_frame = activities.querySelector("#" +
-            event.target.attributes["data-frame"].value);
-        let target_window = target_frame.contentWindow;
-
-
-        if (is_active != event.target && event.target.nodeName === "BUTTON") {
-            // change button active
-            is_active.classList.remove("active");
-            event.target.classList.add("active");
-
-            if (menu_frame != null) {
-                menu_frame.classList.remove("z-3");
-                menu_frame.classList.add("z-0");
-            }
-
-            // move target frame depth
-            target_frame.classList.remove("z-0");
-            target_frame.classList.add("z-3");
-            menu_frame = target_frame;
-            console.log(target_frame);
-            console.log(target_window.location.href);
-        }
-
         // apply href location
         if (event.target.attributes["data-href"]) {
+
+            // get the target frame and window elements
+            let target_frame = activities.querySelector("#" +
+                event.target.attributes["data-frame"].value);
+            let target_window = target_frame.contentWindow;
+
+            if (is_active != event.target) {
+                // change button active
+                is_active.classList.remove("active");
+                event.target.classList.add("active");
+
+                // enable/disable menu-child for is_active and target
+                if (is_active.attributes["data-menu-child"]) {
+                    let menu_child = document.querySelector("#" +
+                        is_active.attributes["data-menu-child"].value);
+                    menu_child.classList.remove("enabled");
+                    menu_child.classList.add("disabled");
+                }
+                if (event.target.attributes["data-menu-child"]) {
+                    let menu_child = document.querySelector("#" +
+                        event.target.attributes["data-menu-child"].value);
+                    menu_child.classList.remove("disabled");
+                    menu_child.classList.add("enabled");
+                }
+
+                if (menu_frame != null) {
+                    menu_frame.classList.remove("z-3");
+                    menu_frame.classList.add("z-0");
+                }
+
+                // move target frame depth
+                target_frame.classList.remove("z-0");
+                target_frame.classList.add("z-3");
+                menu_frame = target_frame;
+                console.log(target_frame);
+                console.log(target_window.location.href);
+            }
+
+            // set src attribute on target frame
             if (target_window.location.href === "about:blank"
                 || target_frame === contents) {
                 let data_href = event.target.attributes["data-href"].value;

@@ -41,28 +41,34 @@
                 </li>
                 <li class="nav-item">
                     <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty"
-                        onclick="menu_click(event)">
+                        data-menu-child="menu_console" onclick="menu_click(event)">
                         Open console
                     </button>
                 </li>
-                <div class="dropdown ms-5">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                <li class="dropdown ms-4 mt-1">
+                    <button id="menu_console" class="btn btn-outline-light disabled dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Console tasks
-                    </a>
+                    </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="#" data-frame="tty" data-fn="alr_toolchain_select()"
-                                onclick="menu_click(event)">Check toolchain</a></li>
-                        <li><a class="dropdown-item" href="#" data-frame="tty" data-fn="alr_compile_project_euler()"
-                                onclick="menu_click(event)">Compile
-                                Project Euler</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <button class="dropdown-item" data-fn="alr_toolchain_select()" onclick="menu_click(event)">
+                                Check toolchain
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" data-fn="alr_compile('alice/project_euler')"
+                                onclick="menu_click(event)">
+                                Compile Project Euler
+                            </button>
+                        </li>
+                        <li><button class="dropdown-item">Profile</button></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><button class="dropdown-item" href="#">Sign out</button></li>
                     </ul>
-                </div>
+                </li>
             </ul>
             <hr>
         </div>
