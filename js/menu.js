@@ -52,7 +52,7 @@ function menu_click(event) {
 
             // set src attribute on target frame
             if (target_window.location.href === "about:blank"
-                || target_frame === contents) {
+                || target_frame === contents || target_frame === solution) {
                 let data_href = event.target.attributes["data-href"].value;
                 target_window.location.replace(data_href);
                 console.log("apply href: " + data_href);
