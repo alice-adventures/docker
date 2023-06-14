@@ -3,13 +3,86 @@
 <html lang="en" data-bs-theme="light">
 
 <head>
-    <?php include_once("head.html")?>
+  <?php include_once("head.html")?>
+  <link href="/css/sidebar.css" rel="stylesheet">
+  <script src="/js/tty.js"></script>
+  <script src="/js/menu.js"></script>
+  <script src="/js/alr.js"></script>
 </head>
 
-<body data-bs-theme="light">
-
-    <div></div>
-
+<body>
+  <main class="d-flex flex-nowrap">
+    <div class="d-flex flex-column flex-shrink-0 h-100 p-2 text-bg-dark" style="width: 280px;">
+      <div class="fs-3 display-3 mx-2 py-2">Participate in Alice</div>
+      <hr>
+      <ul id="menu" class="nav nav-pills nav-fill flex-column mb-auto me-3">
+        <li class="nav-item text-start">
+          <h4 class="ms-1 mt-2 mb-3">
+            Project Euler
+          </h4>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-start text-white active" data-frame="contents" data-href=""
+            onclick="menu_click(event)">
+            Home
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-start text-white" data-frame="solution" data-href="/solution"
+            onclick="menu_click(event)">
+            Open solution
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-start text-white" data-frame="code"
+            data-href="/code?folder=<?=getenv('ALICE_HOME')?>/project_euler" onclick="menu_click(event)">
+            Open code-server
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty"
+            data-menu-child="menu_console" onclick="menu_click(event)">
+            Open console
+          </button>
+        </li>
+        <li class="dropdown ms-4 mt-1">
+          <button id="menu_console" class="btn btn-outline-light disabled dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Console tasks
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <li>
+              <button class="dropdown-item" data-fn="alr_toolchain_select()" onclick="menu_click(event)">
+                Check toolchain
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item" data-fn="alr_compile('alice/project_euler')" onclick="menu_click(event)">
+                Compile Project Euler
+              </button>
+            </li>
+            <li><button class="dropdown-item">Profile</button></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><button class="dropdown-item" href="#">Sign out</button></li>
+          </ul>
+        </li>
+      </ul>
+      <hr>
+      <div class="my-1 mx-3">
+        <a href="javascript:history.back()" class="d-flex align-items-center text-white text-decoration-none">
+          <h5>&lt; &nbsp; Back</h5>
+        </a>
+      </div>
+    </div>
+    <div id="activities" class="z-0 h-100 position-absolute" style="left:280px;right:0;">
+      <iframe id="contents" class="z-3 position-absolute h-100 w-100"></iframe>
+      <iframe id="solution" class="z-0 position-absolute h-100 w-100"></iframe>
+      <iframe id="code" class="z-0 position-absolute h-100 mw-100 w-100"></iframe>
+      <iframe id="tty" class="z-0 invisible position-absolute h-100 w-100"></iframe>
+    </div>
+  </main>
 </body>
 
 </html>

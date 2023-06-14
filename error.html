@@ -3,40 +3,32 @@
 <html lang="en" data-bs-theme="light">
 
 <head>
-    <?php include_once("head.html")?>
+  <?php include_once("head.html")?>
 </head>
 
 <body>
-    <!-- <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-        <div class="container-fluid py-5 m-5">
-            <h1 class="display-5 fw-bold">Error
-                <?=$_GET["status"]?>
-            </h1>
-            <p class="col-md-8 fs-4">Please report this error.</p>
-        </div>
-    </div> -->
-    <div class="container">
-        <div class="mb-1 pb-1 pt-3 bg-body-tertiary rounded-3">
-            <div class="container-fluid m-5">
-                <h1 class="display-5 fw-bold">Error
-                    <?=$_GET["status"]?>
-                </h1>
-                <h3 class="mb-5">
-                    In page
-                    <?=$_GET["page"]?>
-                </h3>
-                <p class="col-md-8 fs-4 my-5">Something went wrong ...</p>
-            </div>
-        </div>
-        <?php if ($_GET["page"] == "solution"): ?>
-        <div class="alert alert-warning col-6 my-3">
-            Page 'Solution' only works when a problem is running.
-        </div>
-        <?php endif ?>
+  <div class="container">
+    <div class="mb-1 pb-1 pt-3 bg-body-tertiary rounded-3">
+      <div class="container-fluid m-5">
+        <h1 class="display-5 fw-bold">Error
+          <?=$_GET["status"]?>
+        </h1>
+        <h3 class="mb-5">
+          In page
+          <?=$_GET["page"]?>
+        </h3>
+        <p class="col-md-8 fs-4 my-5">Something went wrong ...</p>
+      </div>
     </div>
-    <picture class="position-fixed top-50 start-50 translate-middle my-5">
-        <img class="my-5 opacity-25"
-            srcset="/img/alice-x1.png 1280w, /img/alice-x2.png 1920w, /img/alice-x3.png 2560w, /img/alice-x4.png 3840w"
-            src="/img/alice-x1.png" alt="">
-    </picture>
+    <?php if ($_GET["page"] == "solution"): ?>
+    <div class="alert alert-warning col-6 my-3">
+      Page 'Solution' only works when a problem is running.
+    </div>
+    <?php endif ?>
+  </div>
+  <picture class="position-fixed top-50 start-50 translate-middle my-5">
+    <img class="my-5 opacity-25"
+      srcset="/img/alice-x1.png 1280w, /img/alice-x2.png 1920w, /img/alice-x3.png 2560w, /img/alice-x4.png 3840w"
+      src="/img/alice-x1.png" alt="">
+  </picture>
 </body>
