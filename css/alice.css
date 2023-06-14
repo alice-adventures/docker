@@ -11,24 +11,3 @@ h5,
     font-family: "Oswald" !important;
     font-weight: 400;
 }
-
-.sidebar {
-    color: white;
-    background-color: #0061af;
-}
-
-#background {
-    position: absolute;
-    top: 0;
-    opacity: 20%;
-    z-index: -100;
-}
-
-#alice {
-    padding-top: 88px;
-}
-
-#tty {
-    width: 900px;
-    height: 600px;
-}
