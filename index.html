@@ -8,10 +8,16 @@
 
 <body>
 
-  <div id="background">
-    <picture>
-      <img srcset="/img/alice-x1.png 1280w, /img/alice-x2.png 1920w, /img/alice-x3.png 2560w, /img/alice-x4.png 3840w"
-        src="/img/alice-x1.png" alt="" width="100%">
+  <div id="background" class="opacity-25" style="z-index:-100;">
+    <picture class="position-absolute">
+      <img
+        srcset="/img/rabbit-hole-x1.png 1280w, /img/rabbit-hole-x2.png 1920w, /img/rabbit-hole-x3.png 2560w, /img/rabbit-hole-x4.png 3840w"
+        src="/img/rabbit-hole-x1.png" alt="" width="100%">
+    </picture>
+    <picture class="position-fixed top-0 start-50 translate-middle-x my-5 py-5">
+      <img class="my-5"
+        srcset="/img/alice-x1.png 1280w, /img/alice-x2.png 1920w, /img/alice-x3.png 2560w, /img/alice-x4.png 3840w"
+        src="/img/alice-x1.png" alt="">
     </picture>
   </div>
 
