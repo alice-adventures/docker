@@ -24,6 +24,9 @@ function menu_click(event) {
                     let menu_child = document.querySelector("#" +
                         is_active.attributes["data-menu-child"].value);
                     menu_child.classList.remove("enabled");
+                    if (menu_child.classList.contains("show")) {
+                        menu_child.click();
+                    }
                     menu_child.classList.add("disabled");
                 }
                 if (event.target.attributes["data-menu-child"]) {
