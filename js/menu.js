@@ -36,6 +36,7 @@ function menu_click(event) {
                     menu_child.classList.add("enabled");
                 }
 
+                // swap pages
                 if (menu_frame != null) {
                     menu_frame.classList.remove("z-3");
                     menu_frame.classList.add("z-0");
