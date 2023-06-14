@@ -11,3 +11,8 @@ h5,
     font-family: "Oswald" !important;
     font-weight: 400;
 }
+
+.btn,
+.nav-link {
+    transition: none !important;
+}
