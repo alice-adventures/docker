@@ -28,52 +28,67 @@
           </button>
         </li>
         <li class="nav-item">
-          <button class="nav-link text-start text-white" data-frame="solution" data-href="/solution"
-            onclick="menu_click(event)">
-            Open solution
-          </button>
-        </li>
-        <li class="nav-item">
           <button class="nav-link text-start text-white" data-frame="code"
             data-href="/code?folder=<?=getenv('ALICE_HOME')?>/project_euler" onclick="menu_click(event)">
-            Open code-server
+            Code
           </button>
         </li>
+        <div class="d-flex">
+          <div>
+            <li class="nav-item">
+              <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty"
+                data-menu-child="menu_console" onclick="menu_click(event)">
+                Console
+              </button>
+            </li>
+          </div>
+          <div>
+            <li class="dropdown ms-2">
+              <button id="menu_console" class="btn btn-dark disabled dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                tasks
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                <li>
+                  <button class="dropdown-item" data-fn="alr_toolchain_select()" onclick="menu_click(event)">
+                    Check toolchain
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-fn="alr_compile('alice/project_euler')"
+                    onclick="menu_click(event)">
+                    Compile Project Euler
+                  </button>
+                </li>
+                <li><button class="dropdown-item">Profile</button></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><button class="dropdown-item" href="#">Sign out</button></li>
+              </ul>
+            </li>
+          </div>
+        </div>
         <li class="nav-item">
-          <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty"
-            data-menu-child="menu_console" onclick="menu_click(event)">
-            Open console
+          <button class="nav-link text-start text-white" data-frame="solution" data-href="/solution"
+            onclick="menu_click(event)">
+            Solution
           </button>
-        </li>
-        <li class="dropdown ms-4 mt-1">
-          <button id="menu_console" class="btn btn-outline-light disabled dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Console tasks
-          </button>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li>
-              <button class="dropdown-item" data-fn="alr_toolchain_select()" onclick="menu_click(event)">
-                Check toolchain
-              </button>
-            </li>
-            <li>
-              <button class="dropdown-item" data-fn="alr_compile('alice/project_euler')" onclick="menu_click(event)">
-                Compile Project Euler
-              </button>
-            </li>
-            <li><button class="dropdown-item">Profile</button></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><button class="dropdown-item" href="#">Sign out</button></li>
-          </ul>
         </li>
       </ul>
       <hr>
-      <div class="my-1 mx-3">
-        <a href="javascript:history.back()" class="d-flex align-items-center text-white text-decoration-none">
-          <h5>&lt; &nbsp; Back</h5>
-        </a>
+      <div class="d-flex justify-content-between my-1 mx-1 px-4 text-center">
+        <div>
+          <a href="back" onClick="history.back()" class="d-inline display fs-5 text-white text-decoration-none">
+            &lt;&nbsp;Back
+          </a>
+        </div>
+        <div>
+          <a href="participate" onClick="history.go('/participate.html')"
+            class="d-inline display fs-5 text-white text-decoration-none">
+            Participate&nbsp;&gt;
+          </a>
+        </div>
       </div>
     </div>
     <div id="activities" class="z-0 h-100 position-absolute" style="left:280px;right:0;">
