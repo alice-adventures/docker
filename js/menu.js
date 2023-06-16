@@ -36,25 +36,29 @@ function menu_click(event) {
                     menu_child.classList.add("enabled");
                 }
 
-                // swap pages
-                if (menu_frame != null) {
-                    menu_frame.classList.remove("z-3");
-                    menu_frame.classList.add("z-0");
-                }
-
-                // move target frame depth
+                // move target frame to foreground
                 target_frame.classList.remove("z-0");
                 target_frame.classList.add("z-3");
+
+                // move current frame to background
+                if (menu_frame == null) {
+                    menu_frame = contents;
+                }
+                menu_frame.classList.remove("z-3");
+                menu_frame.classList.add("z-0");
                 menu_frame = target_frame;
+
                 console.log(target_frame);
                 console.log(target_window.location.href);
             }
 
             // set src attribute on target frame
-            if (target_window.location.href === "about:blank"
-                || target_frame === contents || target_frame === solution) {
-                let data_href = event.target.attributes["data-href"].value;
+            let old_href = target_window.location.pathname +
+                target_window.location.search;
+            let data_href = event.target.attributes["data-href"].value;
+            if (old_href != data_href || target_frame === solution) {
                 target_window.location.replace(data_href);
+                console.log("old href: " + old_href);
                 console.log("apply href: " + data_href);
                 if (target_frame === tty) {
                     console.log("onLoad");
