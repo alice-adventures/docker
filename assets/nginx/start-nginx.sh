@@ -15,7 +15,7 @@ if [ -f ${CODE}.in ]; then
               grep inet | cut -d' ' -f3 | cut -d/ -f1)
     sudo sh -c "sed -e \"s/DOCKER_IP_ADDR/$IP_ADDR/g\" ${CODE}.in > $CODE"
     sudo rm ${CODE}.in
-    sudo ln -s $CODE /etc/nginx/sites-enabled/code
+    sudo ln -sf $CODE /etc/nginx/sites-enabled/code
 fi
 
 sudo --preserve-env php-fpm${PHP_FPM_VERSION:-8.1}
