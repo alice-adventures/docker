@@ -38,6 +38,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     media-types \
     nginx-light \
     php-fpm \
+    ssl-cert \
     ssh \
     sudo \
     unzip \
