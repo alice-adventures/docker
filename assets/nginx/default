@@ -96,21 +96,6 @@ server {
 		error_page 400 404 500 502 503 504 /error.html?page=tty&status=$status;
 	}
 
-	# reverse proxy for code-server
-	# location ~ ^/code(.*)$ {
-	location /code/ {
-		proxy_http_version 1.1;
-		proxy_set_header Host $http_host;
-		proxy_set_header X-Forwarded-Proto $scheme;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header Upgrade $http_upgrade;
-		proxy_set_header Connection upgrade;
-		proxy_set_header Accept-Encoding gzip;
-		proxy_pass http://localhost:47801/;
-		proxy_intercept_errors on;
-		error_page 400 404 500 502 503 504 /error.html?page=code&status=$status;
-	}
-
 	error_page 400 404 500 502 503 504 /error.html?page=main&status=$status;
 
 	# deny access to .htaccess files, if Apache's document root
