@@ -3,7 +3,7 @@
 <html lang="en" data-bs-theme="light">
 
 <head>
-  <?php include_once("head.html")?>
+  <?php include_once('head.html'); ?>
   <link href="/css/sidebar.css" rel="stylesheet">
   <script src="/js/tty.js"></script>
   <script src="/js/menu.js"></script>
@@ -11,32 +11,33 @@
 </head>
 
 <body>
-  <main class="d-flex flex-nowrap">
-    <div class="d-flex flex-column flex-shrink-0 h-100 p-2 text-bg-dark" style="width: 280px;">
+
+  <div class="position-absolute top-0 h-100 left-0 p-3 text-bg-dark" style="width:280px;">
+    <div class="d-flex flex-column flex-shrink-0 text-bg-dark">
       <div class="fs-3 display-3 mx-2 py-2">Develop in Alice</div>
       <hr>
-      <ul id="menu" class="nav nav-pills nav-fill flex-column mb-auto">
+      <ul id="menu" class="nav nav-pills nav-fill flex-column me-2">
         <li class="nav-item text-start">
           <h4 class="ms-1 mt-2 mb-3">
             Project Euler
           </h4>
         </li>
         <li class="nav-item">
-          <button class="nav-link text-start text-white active" data-frame="contents" data-href=""
+          <button class="nav-link text-start text-white active" data-frame="contents" data-href="/develop_home.html"
             onclick="menu_click(event)">
             Home
           </button>
         </li>
         <li class="nav-item">
           <button class="nav-link text-start text-white" data-frame="code"
-            data-href="/code?folder=<?=getenv('ALICE_HOME')?>/project_euler" onclick="menu_click(event)">
+            data-href="<?=$CODE_SERVER?>/?folder=<?=getenv('ALICE_HOME')?>/project_euler" onclick="menu_click(event)">
             Code
           </button>
         </li>
         <div class="d-flex">
           <div>
             <li class="nav-item">
-              <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty"
+              <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty/"
                 data-menu-child="menu_console" onclick="menu_click(event)">
                 Console
               </button>
@@ -70,14 +71,16 @@
           </div>
         </div>
         <li class="nav-item">
-          <button class="nav-link text-start text-white" data-frame="solution" data-href="/solution"
+          <button class="nav-link text-start text-white" data-frame="solution" data-href="/solution/"
             onclick="menu_click(event)">
             Solution
           </button>
         </li>
       </ul>
-      <hr>
-      <div class="d-flex justify-content-between my-1 mx-1 px-4 text-center">
+    </div>
+    <div class="position-absolute bottom-0 w-100 pe-3 pb-3">
+      <hr class="me-3">
+      <div class="d-flex justify-content-between my-1 mx-3 pe-3 text-center">
         <div>
           <a href="back" onClick="history.back()" class="d-inline display fs-5 text-white text-decoration-none">
             &lt;&nbsp;Back
@@ -91,14 +94,16 @@
         </div>
       </div>
     </div>
-    <div id="activities" class="z-0 h-100 position-absolute" style="left:280px;right:0;">
-      <iframe id="contents" class="z-3 position-absolute h-100 w-100"></iframe>
-      <iframe id="solution" class="z-0 position-absolute h-100 w-100"></iframe>
-      <iframe id="code" class="z-0 position-absolute h-100 mw-100 w-100"></iframe>
-      <iframe id="tty" class="z-0 invisible position-absolute h-100 w-100"></iframe>
-      <iframe id="blank" class="z-2 position-absolute h-100 w-100" src="/blank.html"></iframe>
-    </div>
-  </main>
+  </div>
+
+  <div id="activities" class="position-absolute top-0 h-100" style="left:280px;right:0;">
+    <iframe id="contents" class="z-3 position-absolute h-100 w-100" src="/develop_home.html"></iframe>
+    <iframe id="solution" class="z-0 position-absolute h-100 w-100"></iframe>
+    <iframe id="code" class="z-0 position-absolute h-100 mw-100 w-100"></iframe>
+    <iframe id="tty" class="z-0 invisible position-absolute h-100 w-100"></iframe>
+    <iframe id="blank" class="z-2 position-absolute h-100 w-100" src="/blank.html"></iframe>
+  </div>
+
 </body>
 
 </html>
