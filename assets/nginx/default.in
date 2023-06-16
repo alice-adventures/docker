@@ -21,7 +21,7 @@
 
 server {
 	listen [::]:80;
-	listen 172.17.0.2:80;
+	listen DOCKER_IP_ADDR:80;
 	server_name _;
 	return 301 https://$host$request_uri;
 }
@@ -29,7 +29,7 @@ server {
 server {
 	# SSL configuration
 	#
-	listen 172.17.0.2:443 ssl;
+	listen DOCKER_IP_ADDR:443 ssl;
 	listen [::]:443 ssl;
 	#
 	# Note: You should disable gzip for SSL traffic.

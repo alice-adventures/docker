@@ -74,7 +74,8 @@ WORKDIR /etc/nginx
 RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/nginx.conf
 
 WORKDIR /etc/nginx/sites-available
-RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/default
+RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/code.in && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/default.in
 
 WORKDIR /etc/php/${PHP_FPM_VERSION}/fpm/pool.d
 RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/php/www.conf
