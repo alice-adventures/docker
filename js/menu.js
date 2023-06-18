@@ -49,7 +49,7 @@ function menu_click(event) {
                 menu_frame = target_frame;
 
                 console.log(target_frame);
-                console.log(target_window.location.href);
+                console.log(target_window.location);
             }
 
             // set src attribute on target frame
@@ -57,7 +57,7 @@ function menu_click(event) {
                 target_window.location.search;
             let data_href = event.target.attributes["data-href"].value;
             if (old_href != data_href || target_frame === solution) {
-                target_window.location.replace(data_href);
+                target_window.location = data_href;
                 console.log("old href: " + old_href);
                 console.log("apply href: " + data_href);
                 if (target_frame === tty) {
