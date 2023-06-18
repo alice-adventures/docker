@@ -41,6 +41,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     ssl-cert \
     ssh \
     sudo \
+    tig \
     unzip \
     websocketd \
     wget
