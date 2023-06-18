@@ -82,7 +82,7 @@ docker build --build-arg VARIABLE=VALUE --build-arg FOO=BAR  ...
 Run an instance of your docker image with
 
 ```sh
-docker run --detach --tty --name alice --hostname wland alice-adventures:0.1.1
+docker run --detach --tty --name alice --hostname wland -p 47800:47800 alice-adventures:0.1.1
 ```
 
 
