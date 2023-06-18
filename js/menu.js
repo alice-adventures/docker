@@ -47,22 +47,29 @@ function menu_click(event) {
                 menu_frame.classList.remove("z-3");
                 menu_frame.classList.add("z-0");
                 menu_frame = target_frame;
-
-                console.log(target_frame);
-                console.log(target_window.location);
             }
 
             // set src attribute on target frame
-            let old_href = target_window.location.pathname +
-                target_window.location.search;
-            let data_href = event.target.attributes["data-href"].value;
-            if (old_href != data_href || target_frame === solution) {
-                target_window.location = data_href;
+            let old_href = null;
+            if (target_frame.attributes["data-href"]) {
+                old_href = target_frame.attributes["data-href"].value;
+            }
+            // let old_href = target_window.location.pathname +
+            //     target_window.location.search;
+            let new_href = event.target.attributes["data-href"].value;
+            if (old_href != new_href) {
+                target_window.location = new_href;
                 console.log("old href: " + old_href);
-                console.log("apply href: " + data_href);
+                console.log("new href: " + new_href);
                 if (target_frame === tty) {
                     console.log("onLoad");
                     tty_onLoad();
+                }
+                if (old_href === null) {
+                    target_frame.attributes["data-href"] = new_href;
+                }
+                else {
+                    target_frame.attributes["data-href"].value = new_href;
                 }
             }
         }
