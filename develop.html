@@ -70,12 +70,31 @@
             </li>
           </div>
         </div>
-        <li class="nav-item">
-          <button class="nav-link text-start text-white" data-frame="solution" data-href="<?=$SOLUTION?>"
-            onclick="menu_click(event)">
-            Solution
-          </button>
-        </li>
+        <div class="d-flex">
+          <div>
+            <li class="nav-item">
+              <button class="nav-link text-start text-white" data-frame="solution" data-href="<?=$SOLUTION?>"
+                data-menu-child="menu_solution" onclick="menu_click(event)">
+                Solution
+              </button>
+            </li>
+          </div>
+          <div>
+            <li class="dropdown ms-2">
+              <button id="menu_solution" class="btn btn-dark disabled dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                tasks
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                <li>
+                  <button class="dropdown-item" data-fn="solution_load('<?=$SOLUTION?>')" onclick="menu_click(event)">
+                    Reload
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </div>
+        </div>
       </ul>
     </div>
     <div class="position-absolute bottom-0 w-100 pe-3 pb-3">

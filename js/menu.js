@@ -1,3 +1,8 @@
+
+function solution_load(href) {
+    solution.contentWindow.location = href;
+}
+
 let menu_frame = null;
 
 function menu_click(event) {
@@ -54,6 +59,7 @@ function menu_click(event) {
             if (target_frame.attributes["data-href"]) {
                 old_href = target_frame.attributes["data-href"].value;
             }
+
             // let old_href = target_window.location.pathname +
             //     target_window.location.search;
             let new_href = event.target.attributes["data-href"].value;
