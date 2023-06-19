@@ -139,6 +139,10 @@ WORKDIR /home/${user_name}
 RUN [ "${code_server}" = "false" ] || /usr/local/bin/update-code-server.sh
 
 
+### Exported ports
+
+EXPOSE 47800
+
 ### Entrypoint
 
 USER ${user_name}
