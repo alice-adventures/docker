@@ -1,3 +1,8 @@
+### USAGE
+#    build image: docker build --tag alice-adventures:0.1.1 https://raw.githubusercontent.com/alice-adventures/docker/main/Dockerfile
+#  run container: docker run --detach --tty --name alice --hostname wland -p 47800:47800 alice-adventures:0.1.1
+# access content: visit http://17.17.0.2
+
 FROM ubuntu:22.04
 
 ARG user_name=guest
