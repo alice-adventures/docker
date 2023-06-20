@@ -4,6 +4,7 @@
 
 <head>
   <?php include_once('head.html'); ?>
+  <?php include_once('menu.php'); ?>
   <link href="/css/sidebar.css" rel="stylesheet">
   <script src="/js/tty.js"></script>
   <script src="/js/menu.js"></script>
@@ -16,86 +17,19 @@
     <div class="d-flex flex-column flex-shrink-0 text-bg-dark">
       <div class="fs-3 display-3 mx-2 py-2">Develop in Alice</div>
       <hr>
-      <ul id="menu" class="nav nav-pills nav-fill flex-column me-2">
-        <li class="nav-item text-start">
-          <h4 class="ms-1 mt-2 mb-3">
-            Project Euler
-          </h4>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link text-start text-white active" data-frame="contents" data-href="/develop_home.html"
-            onclick="menu_click(event)">
-            Home
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link text-start text-white" data-frame="code"
-            data-href="<?=$CODE_SERVER?>/?folder=<?=getenv('ALICE_HOME')?>/project_euler" onclick="menu_click(event)">
-            Code
-          </button>
-        </li>
-        <div class="d-flex">
-          <div>
-            <li class="nav-item">
-              <button class="nav-link text-start text-white" data-frame="tty" data-href="/tty/"
-                data-menu-child="menu_console" onclick="menu_click(event)">
-                Console
-              </button>
-            </li>
-          </div>
-          <div>
-            <li class="dropdown ms-2">
-              <button id="menu_console" class="btn btn-dark disabled dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                tasks
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li>
-                  <button class="dropdown-item" data-fn="alr_toolchain_select()" onclick="menu_click(event)">
-                    Check toolchain
-                  </button>
-                </li>
-                <li>
-                  <button class="dropdown-item" data-fn="alr_compile('alice/project_euler')"
-                    onclick="menu_click(event)">
-                    Compile Project Euler
-                  </button>
-                </li>
-                <li><button class="dropdown-item">Profile</button></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><button class="dropdown-item" href="#">Sign out</button></li>
-              </ul>
-            </li>
-          </div>
-        </div>
-        <div class="d-flex">
-          <div>
-            <li class="nav-item">
-              <button class="nav-link text-start text-white" data-frame="solution" data-href="<?=$SOLUTION?>"
-                data-menu-child="menu_solution" onclick="menu_click(event)">
-                Solution
-              </button>
-            </li>
-          </div>
-          <div>
-            <li class="dropdown ms-2">
-              <button id="menu_solution" class="btn btn-dark disabled dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                tasks
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li>
-                  <button class="dropdown-item" data-fn="solution_load('<?=$SOLUTION?>')" onclick="menu_click(event)">
-                    Reload
-                  </button>
-                </li>
-              </ul>
-            </li>
-          </div>
-        </div>
-      </ul>
+      <?=
+      menu_start("Project Euler");
+        menu_item("Home", "contents", "/develop_home.html");
+        menu_item("Code", "code", $CODE_SERVER . "/?folder=" . getenv('ALICE_HOME') . "/project_euler");
+        menu_start_item_with_tasks("menu_console", "Console", "tty", "/tty/");
+          menu_item_task("Check toolchain", "alr_toolchain_select()");
+          menu_item_task("Compile Project Euler", "alr_compile('alice/project_euler')");
+        menu_end_item_with_tasks();
+        menu_start_item_with_tasks("menu_solution", "Solution", "solution", "$SOLUTION");
+          menu_item_task("Reload", "solution_load('" . $SOLUTION . "')");
+        menu_end_item_with_tasks();
+      menu_end();
+      ?>
     </div>
     <div class="position-absolute bottom-0 w-100 pe-3 pb-3">
       <hr class="me-3">
