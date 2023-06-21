@@ -12,45 +12,35 @@
 </head>
 
 <body>
+  <?php
+  menu_bar_start("Develop in Alice");
+  {
+    menu_start("Project Euler");
+    {
+      menu_item("Home", "contents", "/develop_home.html");
+      menu_item("Code", "code", $CODE_SERVER . "/?folder=" . getenv('ALICE_HOME') . "/project_euler");
 
-  <div class="position-absolute top-0 h-100 left-0 p-3 text-bg-dark" style="width:280px;">
-    <div class="d-flex flex-column flex-shrink-0 text-bg-dark">
-      <div class="fs-3 display-3 mx-2 py-2">Develop in Alice</div>
-      <hr>
-      <?=
-      menu_start("Project Euler");
-        menu_item("Home", "contents", "/develop_home.html");
-        menu_item("Code", "code", $CODE_SERVER . "/?folder=" . getenv('ALICE_HOME') . "/project_euler");
-        menu_start_item_with_tasks("menu_console", "Console", "tty", "/tty/", "tty_terminal.focus()");
-          menu_item_task("Check toolchain", "alr_toolchain_select(); tty_focus()");
-          menu_item_task("Compile Project Euler", "alr_compile('alice/project_euler'); tty_focus()");
-          menu_item_task_divider();
-          menu_item_task("Theme Light", "tty_setThemeLight(); tty_focus()");
-          menu_item_task("Theme Dark", "tty_setThemeDark(); tty_focus()");
-        menu_end_item_with_tasks();
-        menu_start_item_with_tasks("menu_solution", "Solution", "solution", "$SOLUTION");
-          menu_item_task("Reload", "solution_load('" . $SOLUTION . "')");
-        menu_end_item_with_tasks();
-      menu_end();
-      ?>
-    </div>
-    <div class="position-absolute bottom-0 w-100 pe-3 pb-3">
-      <hr class="me-3">
-      <div class="d-flex justify-content-between my-1 mx-3 pe-3 text-center">
-        <div>
-          <a href="back" onClick="history.back()" class="d-inline display fs-5 text-white text-decoration-none">
-            &lt;&nbsp;Back
-          </a>
-        </div>
-        <div>
-          <a href="participate" onClick="history.go('/participate.html')"
-            class="d-inline display fs-5 text-white text-decoration-none">
-            Participate&nbsp;&gt;
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+      menu_start_item_with_tasks("menu_console", "Console", "tty", "/tty/", "tty_focus()");
+      {
+        menu_item_task("Check toolchain", "alr_toolchain_select(); tty_focus()");
+        menu_item_task("Compile Project Euler", "alr_compile('alice/project_euler'); tty_focus()");
+        menu_item_task_divider();
+        menu_item_task("Theme Light", "tty_setThemeLight(); tty_focus()");
+        menu_item_task("Theme Dark", "tty_setThemeDark(); tty_focus()");
+      }
+      menu_end_item_with_tasks();
+
+      menu_start_item_with_tasks("menu_solution", "Solution", "solution", "$SOLUTION");
+      {
+        menu_item_task("Reload", "solution_load('" . $SOLUTION . "')");
+      }
+      menu_end_item_with_tasks();
+    }
+    menu_end();
+    menu_bottom("Back", "/index.html", "Participate", "/participate.html");
+  }
+  menu_bar_end();
+  ?>
 
   <div id="activities" class="position-absolute top-0 h-100" style="left:280px;right:0;">
     <iframe id="contents" data-href="/develop_home.html" src="/develop_home.html"

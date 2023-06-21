@@ -10,7 +10,9 @@ function tty_onLoad() {
 }
 
 function tty_focus() {
-    tty_terminal.focus();
+    if (tty_terminal != null) {
+        tty_terminal.focus();
+    }
 }
 
 function tty_initTerminal() {
