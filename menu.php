@@ -25,12 +25,13 @@ function menu_item($name, $frame, $href) {
     $menu_item_first = false;
 }
 
-function menu_start_item_with_tasks($menu_id, $name, $frame, $href) {
+function menu_start_item_with_tasks($menu_id, $name, $frame, $href, $fn="") {
+    $data_fn = ($fn == "" ? "" : " data-fn='" . $fn . "'");
     echo '  <div class="d-flex">';
     echo '    <div>';
     echo '      <li class="nav-item">';
     echo '        <button class="nav-link text-start text-white" data-frame="'
-         , $frame, '" data-href="', $href, '"';
+         , $frame, '" data-href="', $href, '"', $data_fn;
     echo '          data-menu-child="'
          , $menu_id, '" onclick="menu_click(event)">';
     echo '          ', $name;

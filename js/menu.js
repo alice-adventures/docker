@@ -78,6 +78,13 @@ function menu_click(event) {
                     target_frame.attributes["data-href"].value = new_href;
                 }
             }
+
+            // eval function, if any
+            if (event.target.attributes["data-fn"]) {
+                let data_fn = event.target.attributes["data-fn"].value;
+                console.log("eval fn: " + data_fn);
+                eval(data_fn);
+            }
         }
         else { // or call function
             let data_fn = event.target.attributes["data-fn"].value;

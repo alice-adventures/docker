@@ -21,9 +21,12 @@
       menu_start("Project Euler");
         menu_item("Home", "contents", "/develop_home.html");
         menu_item("Code", "code", $CODE_SERVER . "/?folder=" . getenv('ALICE_HOME') . "/project_euler");
-        menu_start_item_with_tasks("menu_console", "Console", "tty", "/tty/");
-          menu_item_task("Check toolchain", "alr_toolchain_select()");
-          menu_item_task("Compile Project Euler", "alr_compile('alice/project_euler')");
+        menu_start_item_with_tasks("menu_console", "Console", "tty", "/tty/", "tty_terminal.focus()");
+          menu_item_task("Check toolchain", "alr_toolchain_select(); tty_focus()");
+          menu_item_task("Compile Project Euler", "alr_compile('alice/project_euler'); tty_focus()");
+          menu_item_task_divider();
+          menu_item_task("Theme Light", "tty_setThemeLight(); tty_focus()");
+          menu_item_task("Theme Dark", "tty_setThemeDark(); tty_focus()");
         menu_end_item_with_tasks();
         menu_start_item_with_tasks("menu_solution", "Solution", "solution", "$SOLUTION");
           menu_item_task("Reload", "solution_load('" . $SOLUTION . "')");

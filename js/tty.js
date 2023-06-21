@@ -9,6 +9,10 @@ function tty_onLoad() {
     setTimeout(() => tty_initTerminal(), 1000);
 }
 
+function tty_focus() {
+    tty_terminal.focus();
+}
+
 function tty_initTerminal() {
     tty_frame = document.getElementById("tty");
     tty_terminalTextArea = tty_frame.contentDocument.querySelector("textarea.xterm-helper-textarea");
@@ -26,6 +30,7 @@ function tty_initTerminal() {
     // });
     tty_frame.classList.remove("invisible");
     tty_frame.classList.add("visible");
+    tty_focus();
 }
 
 function tty_disableInput() {
