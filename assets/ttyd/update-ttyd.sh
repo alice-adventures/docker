@@ -23,6 +23,7 @@ fi
 
 # install latest release
 if [ -f $LATEST_RELEASE_FILE ]; then
+    sudo chown root.root ttyd*
     sudo chmod a+x ttyd*
     sudo mv ttyd* /usr/local/bin/ttyd
 fi
