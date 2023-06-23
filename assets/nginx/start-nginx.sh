@@ -6,7 +6,6 @@ IP_ADDR=$(ip address show dev eth0 | tr -s [:space:] | \
 DEFAULT=/etc/nginx/sites-available/default
 if [ -f ${DEFAULT}.in ]; then
     sudo bash -c "sed -e \"s/DOCKER_IP_ADDR/$IP_ADDR/g\" ${DEFAULT}.in > $DEFAULT"
-    sudo rm ${DEFAULT}.in
 fi
 
 CODE=/etc/nginx/sites-available/code
@@ -14,7 +13,6 @@ if [ -f ${CODE}.in ]; then
     IP_ADDR=$(ip address show dev eth0 | tr -s [:space:] | \
               grep inet | cut -d' ' -f3 | cut -d/ -f1)
     sudo sh -c "sed -e \"s/DOCKER_IP_ADDR/$IP_ADDR/g\" ${CODE}.in > $CODE"
-    sudo rm ${CODE}.in
     sudo ln -sf $CODE /etc/nginx/sites-enabled/code
 fi
 
