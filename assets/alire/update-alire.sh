@@ -26,5 +26,6 @@ fi
 if [ -f $LATEST_RELEASE_FILE ]; then
     unzip $LATEST_RELEASE_FILE
     rm -f $LATEST_RELEASE_FILE
+    sudo chown root.root bin/alr
     sudo mv bin/alr /usr/local/bin/alr
 fi

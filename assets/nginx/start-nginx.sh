@@ -1,5 +1,7 @@
 #!/bin/bash
 
+update-ssl.sh
+
 IP_ADDR=$(ip address show dev eth0 | tr -s [:space:] | \
           grep inet | cut -d' ' -f3 | cut -d/ -f1)
 

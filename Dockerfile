@@ -72,10 +72,15 @@ RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/ass
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/code-server/update-code-server.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/start-nginx.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/stop-nginx.sh && \
+    curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ssl/update-ssl.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/start-ttyd.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/stop-ttyd.sh && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/ttyd/update-ttyd.sh && \
     chmod a+x *.sh
+
+WORKDIR /tmp/
+RUN curl -fOL https://alice-adventures.org/alice-docker/alice-docker.crt && \
+    curl -fOL https://alice-adventures.org/alice-docker/alice-docker.pem
 
 WORKDIR /etc/nginx
 RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/nginx.conf
@@ -83,6 +88,9 @@ RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/ass
 WORKDIR /etc/nginx/sites-available
 RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/code.in && \
     curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/default.in
+
+WORKDIR /etc/nginx/snippets
+RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/alice.conf
 
 WORKDIR /etc/php/${PHP_FPM_VERSION}/fpm/pool.d
 RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/php/www.conf
