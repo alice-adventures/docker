@@ -79,8 +79,8 @@ RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/ass
     chmod a+x *.sh
 
 WORKDIR /tmp/
-RUN curl -fOL https://alice-adventures.org/alice-docker/alice-docker.crt && \
-    curl -fOL https://alice-adventures.org/alice-docker/alice-docker.pem
+RUN curl -fOL https://www.alice-adventures.org/alice-docker/alice-docker.crt && \
+    curl -fOL https://www.alice-adventures.org/alice-docker/alice-docker.pem
 
 WORKDIR /etc/nginx
 RUN curl -fOL https://raw.githubusercontent.com/alice-adventures/docker/main/assets/nginx/nginx.conf
